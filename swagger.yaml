@@ -1,0 +1,247 @@
+---
+swagger: "2.0"
+info:
+  description: Avaliação
+  version: 1.0.0
+  title: Cars API
+host: localhost:8080
+basePath: /api
+tags:
+- name: Inserir
+- name: Filtrar
+- name: Ordenar
+schemes:
+- http
+- https
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+  /cars:
+    post:
+      tags:
+      - Inserir
+      summary: Insere Carro
+      description: Insere um novo carro
+      operationId: postCar
+      parameters:
+      - in: body
+        name: CarroForm
+        required: false
+        schema:
+          $ref: '#/definitions/CarroForm'
+      responses:
+        "201":
+          description: Cadastro efetuado com sucesso
+          schema:
+            $ref: '#/definitions/Carro'
+        "400":
+          description: Requisição inválida
+  /cars?nome=value:
+    get:
+      tags:
+      - Filtrar
+      summary: Filtrar por Nome
+      description: Filtra os carros por Nome
+      operationId: buscarPorNome
+      parameters:
+      - name: nome
+        in: query
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Consulta efetuada com sucesso
+          schema:
+            $ref: '#/definitions/Carro'
+        "400":
+          description: Falha na consulta
+  /cars?marca=value:
+    get:
+      tags:
+      - Filtrar
+      summary: Filtrar por Marca
+      description: Filtra os carros por marca
+      operationId: buscarPorMarca
+      parameters:
+      - name: marca
+        in: query
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Consulta efetuada com sucesso
+          schema:
+            $ref: '#/definitions/Carro'
+        "400":
+          description: Falha na consulta
+  /cars?cor=value:
+    get:
+      tags:
+      - Filtrar
+      summary: Filtrar por Cor
+      description: Filtra os carros por cor
+      operationId: buscarPorCor
+      parameters:
+      - name: cor
+        in: query
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Consulta efetuada com sucesso
+          schema:
+            $ref: '#/definitions/Carro'
+        "400":
+          description: Falha na consulta
+  /cars?maiscaro:
+    get:
+      tags:
+      - Filtrar
+      summary: Filtrar o carro mais caro
+      description: Filtra o carro mais caro
+      operationId: buscarMaisCaro
+      parameters:
+      - name: maiscaro
+        in: query
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Consulta efetuada com sucesso
+          schema:
+            $ref: '#/definitions/Carro'
+        "400":
+          description: Falha na consulta
+  /cars?maisbarato:
+    get:
+      tags:
+      - Filtrar
+      summary: Filtrar o carro mais barato
+      description: Filtra o carro mais barato
+      operationId: buscarMaisBarato
+      parameters:
+      - name: maisbarato
+        in: query
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Consulta efetuada com sucesso
+          schema:
+            $ref: '#/definitions/Carro'
+        "400":
+          description: Falha na consulta
+  /cars?ordenarnome:
+    get:
+      tags:
+      - Ordenar
+      summary: Ordenar por Nome
+      description: "Ordena os carros por nome, ascendente"
+      operationId: ordenarNome
+      parameters:
+      - name: ordenarnome
+        in: query
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Consulta efetuada com sucesso
+          schema:
+            $ref: '#/definitions/Carro'
+        "400":
+          description: Falha na consulta
+  /cars?ordenarvalor:
+    get:
+      tags:
+      - Ordenar
+      summary: Ordenar por Valor
+      description: "Ordena os carros por valor, ascendente"
+      operationId: ordenarValor
+      parameters:
+      - name: ordenarvalor
+        in: query
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Consulta efetuada com sucesso
+          schema:
+            $ref: '#/definitions/Carro'
+        "400":
+          description: Falha na consulta
+  /cars?ordenarano:
+    get:
+      tags:
+      - Ordenar
+      summary: Ordenar por Ano
+      description: "Ordena os carros por ano, ascendente"
+      operationId: ordenarAalor
+      parameters:
+      - name: ordenarano
+        in: query
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Consulta efetuada com sucesso
+          schema:
+            $ref: '#/definitions/Carro'
+        "400":
+          description: Falha na consulta
+definitions:
+  CarroForm:
+    type: object
+    properties:
+      chassi:
+        type: string
+        example: 9BBNSZPPA288003333
+      nome:
+        type: string
+        example: fiesta
+      marca:
+        type: string
+        example: ford
+      cor:
+        type: string
+        example: vermelho
+      valor:
+        type: number
+        format: decimal
+        example: 22000.0
+        minimum: 0
+        maximum: 10000000
+      ano:
+        type: integer
+        format: int32
+        example: 2010
+        minimum: 1890
+        maximum: 2100
+  Carro:
+    type: object
+    properties:
+      id:
+        type: number
+        format: int64
+        example: 6.0
+      chassi:
+        type: string
+        example: 9BBNSZPPA288003333
+      nome:
+        type: string
+        example: fiesta
+      marca:
+        type: string
+        example: ford
+      cor:
+        type: string
+        example: vermelho
+      valor:
+        type: number
+        format: decimal
+        example: 22000.0
+      ano:
+        type: integer
+        format: int32
+        example: 2010
